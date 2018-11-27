@@ -1,0 +1,120 @@
+.box{
+  width: 100px;
+  height : 100px;
+  background-image: url("tanah-1.png");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+.game-page{
+  display: block;
+  text-align: center;
+  margin-top: 10%;
+}
+
+.end-page{
+  display: block;
+  margin-top: 20%;
+  text-align: center;
+}
+
+.board{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 400px;
+  margin: auto;
+  margin-top: auto;
+}
+
+.scoreboard{
+  margin: auto;
+  text-align: left;
+  clear: both;
+}
+
+body{
+  background-color: black;
+  color: white;
+
+}
+
+.landing-page{
+  display: block;
+  text-align: center;
+  margin-top: 10%;
+}
+
+button{
+  width: 100px;
+  height: 50px;
+  margin: 10px;
+  border: 0px;
+  color: white;
+  font-family: SDS_8x8;
+
+}
+
+button#startGame{
+  background: url("Start Game.png");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+  width: 100px;
+  height: 50px;
+}
+
+#replayGame{
+  background: url("Start Game.png");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+  width: 100px;
+  height: 50px;
+}
+
+button.buttonSize{
+  background: url("YellowNormal_1.png");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+button.buttonLevel{
+  background: url("GreenNormal_1.png");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+button.sizeActive{
+  background: url("YellowSelected_1.png");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+button.levelActive{
+  background: url("YellowSelected_1.png");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+h1{
+  color: white;
+  font-size: 48;
+  font-weight: bold;
+  font-family: SDS_8x8;
+}
+
+h2{
+  color: white;
+  font-size: 16;
+  font-family: SDS_8x8;
+}
+.hidden{
+  visibility: hidden;
+  display: none;
+}
