@@ -1,3 +1,8 @@
+@font-face {
+    font-family: SDS_8x8;
+    src: url("SDS_8x8.ttf") format('truetype');
+  }
+
 .box{
   width: 100px;
   height : 100px;
@@ -10,7 +15,7 @@
 .game-page{
   display: block;
   text-align: center;
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
 .end-page{
@@ -106,13 +111,13 @@ h1{
   color: white;
   font-size: 48;
   font-weight: bold;
-  font-family: SDS_8x8.ttf;
+  font-family: SDS_8x8;
 }
 
 h2{
   color: white;
   font-size: 16;
-  font-family: SDS_8x8.ttf;
+  font-family: SDS_8x8;
 }
 .hidden{
   visibility: hidden;
