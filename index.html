@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -33,12 +34,12 @@
 
 <div class="game-page">
   <div class="scoreboard">
-    <h2 class="scoreIndo"></h2>
-    <h2 class="scorePenjajah"></h2>
+    <p class="scoreIndo"></p>
+    <p class="scorePenjajah"></p>
     <br/><br/>
   </div>
   <div class='playerBoard'>
-    <h2 class="current-player"></h>
+    <p class="current-player"></p>
   </div>
   <div class="restart-button"></div>
   <div class="board">
@@ -405,9 +406,9 @@ function refresh(){
   else{
     currPlayer = 'Penjajah';
   }
-  $('.current-player').replaceWith('<h2 class="current-player">CURRENT PLAYER : ' + currPlayer + '</h>');
-  $('.scoreIndo').replaceWith('<h2 class="scoreIndo" style="float:left">INDONESIA :  ' + indo + '</h2>');
-  $('.scorePenjajah').replaceWith('<h2 class="scorePenjajah" style="float:right">PENJAJAH :  ' + penjajah + '</h2>');
+  $('.current-player').replaceWith('<p class="current-player">CURRENT PLAYER : ' + currPlayer + '</p>');
+  $('.scoreIndo').replaceWith('<p class="scoreIndo" style="float:left">INDONESIA :  ' + indo + '</p>');
+  $('.scorePenjajah').replaceWith('<p class="scorePenjajah" style="float:right">PENJAJAH :  ' + penjajah + '</p>');
 
 }
 

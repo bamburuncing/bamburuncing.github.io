@@ -15,7 +15,7 @@
 .game-page{
   display: block;
   text-align: center;
-  margin-top: 5%;
+  margin-top: 50px;
 }
 
 .end-page{
@@ -37,6 +37,8 @@
   margin: auto;
   text-align: left;
   clear: both;
+  width: 800px;
+
 }
 
 body{
@@ -119,6 +121,13 @@ h2{
   font-size: 16;
   font-family: SDS_8x8;
 }
+
+p{
+  color: white;
+  font-size: 16;
+  font-family: SDS_8x8;
+}
+
 .hidden{
   visibility: hidden;
   display: none;
