@@ -373,7 +373,7 @@ function possibleMoves(){
   refresh();
   if (currentPlayer() == 1){
     for (let i = 0; i < validMoves.length; i++){
-      $("#box-" + validMoves[i].movedx + "" + validMoves[i].movedy).css('background-image','url("static/tanah-2.png")');
+      $("#box-" + validMoves[i].movedx + "" + validMoves[i].movedy).css('background-image','url("static/Tanah-2.png")');
     }
   }
 }
@@ -385,14 +385,14 @@ function refresh(){
   for (let row = 0; row < SIZE; row++){
     for (let box = 0; box < SIZE; box++){
       if (mainBoard.state[row][box] == 0){
-        $("#box-" + row + "" + box).css('background-image','url("static/tanah-1.png")');
+        $("#box-" + row + "" + box).css('background-image','url("static/Tanah-1.png")');
       }
       else if (mainBoard.state[row][box] == 1){
-        $("#box-" + row + "" + box).css('background-image','url("static/indonesia.png")');
+        $("#box-" + row + "" + box).css('background-image','url("static/Indonesia.png")');
         indo++;
       }
       else if (mainBoard.state[row][box] == 2){
-        $("#box-" + row + "" + box).css('background-image','url("static/penjajah.png")');
+        $("#box-" + row + "" + box).css('background-image','url("static/Penjajah.png")');
         penjajah++;
       }
     }

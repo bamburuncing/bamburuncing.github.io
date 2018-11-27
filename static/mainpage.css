@@ -1,7 +1,7 @@
 .box{
   width: 100px;
   height : 100px;
-  background-image: url("tanah-1.png");
+  background-image: url("Tanah-1.png");
   background-size:     cover;
   background-repeat:   no-repeat;
   background-position: center center;
@@ -106,13 +106,13 @@ h1{
   color: white;
   font-size: 48;
   font-weight: bold;
-  font-family: SDS_8x8;
+  font-family: SDS_8x8.ttf;
 }
 
 h2{
   color: white;
   font-size: 16;
-  font-family: SDS_8x8;
+  font-family: SDS_8x8.ttf;
 }
 .hidden{
   visibility: hidden;
