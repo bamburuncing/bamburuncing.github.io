@@ -8,22 +8,23 @@
     <meta name="author" content="{{author}}">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="static/index.css"/>
-
+    <title>Bambu Runcing Game</title>
 </head>
 
 
 <body>
 
 <div class="landing-page">
-  <h1>Bambu Runcing</h1><br></br>
+  <!-- <h1>Bambu Runcing</h1><br></br> -->
+  <img src="static/Logo Kecil.png"/><br/><br/>
   <div class="boardSize">
-    <h2>Pilih Ukuran Papan</h2>
+    <p>Pilih Ukuran Papan</p>
     <button class="buttonSize" id="4x4" onClick="setSize(4)">4x4</button>
     <button class="buttonSize" id="8x8" onClick="setSize(8)">8x8</button>
     <br/>
   </div>
   <div class="difficulty">
-    <h2>Pilih Level Kesulitan</h2>
+    <p>Pilih Level Kesulitan</p>
     <button class="buttonLevel" id="easy" onClick="setLevel(1)">Easy</button>
     <button class="buttonLevel" id="medium" onClick="setLevel(3)">Medium</button>
     <button class="buttonLevel" id="hard" onClick="setLevel(5)">Hard</button>
@@ -39,7 +40,8 @@
     <br/><br/>
   </div>
   <div class='playerBoard'>
-    <p class="current-player"></p>
+   <p class="current-player"></p>
+
   </div>
   <div class="restart-button"></div>
   <div class="board">
@@ -64,6 +66,11 @@ $('.buttonSize').click(function() {
     $(this).addClass('levelActive');
     $('.buttonLevel').not(this).removeClass('levelActive');
     console.log('Masuk ganti button');
+});
+  $('#startGame').click(function() {
+    $('.buttonLevel').removeClass('levelActive');
+    $('.buttonSize').removeClass('sizeActive');
+
 });
 
 class Board{
@@ -137,6 +144,7 @@ class Board{
         return isValidMove;
 
   }
+
   getValidMoves(player) {
 
         let validMoves = [];
@@ -243,10 +251,10 @@ async function announceWinner(){
       $('.winner').replaceWith('<h2 class="winner">GAME SERI</h2>');
   }
   else if (indo > penjajah){
-    $('.winner').replaceWith('<h2 class="winner">Indonesia menang! MERDEKA!</h2>');
+    $('.winner').replaceWith('<h2 class="winner">Indonesia menang! <br/><br/> MERDEKA!</h2>');
   }
   else{
-    $('.winner').replaceWith('<h2 class="winner">Tetap semangat!</h2>');
+    $('.winner').replaceWith('<h2 class="winner">Tetap semangat!</h>');
   }
 }
 
@@ -346,8 +354,19 @@ function minimax(depth, maxDepth, board, maximizingPlayer, alpha, beta){
 
 
 function createBoardHTML(){
-  let width = SIZE * 100;
-  $(".board").replaceWith('<div class="board"></div>');
+  let width = 0;
+  let screenWidth = $(window).width();
+  if(screenWidth <= 375) {
+    width= SIZE * 40;
+    $(".scoreboard").css("width", '320px');
+    $(".playerBoard").css("width", '320px');
+
+  }
+  else {
+    width= SIZE * 100;
+    $(".scoreboard").css("width", width+"px");
+
+  }
   $(".board").css("width", width+"px");
   $('.game-page').removeClass('hidden');
   $(".landing-page").addClass("hidden");
@@ -401,14 +420,14 @@ function refresh(){
     }
   }
   if (currentPlayer() == 1){
-    currPlayer = 'Indonesia';
+    currPlayer = 'INDONESIA';
   }
   else{
-    currPlayer = 'Penjajah';
+    currPlayer = 'PENJAJAH';
   }
-  $('.current-player').replaceWith('<p class="current-player">CURRENT PLAYER : ' + currPlayer + '</p>');
-  $('.scoreIndo').replaceWith('<p class="scoreIndo" style="float:left">INDONESIA :  ' + indo + '</p>');
-  $('.scorePenjajah').replaceWith('<p class="scorePenjajah" style="float:right">PENJAJAH :  ' + penjajah + '</p>');
+  $('.current-player').replaceWith('<p class="current-player">Giliran: ' + currPlayer + '</p>');
+  $('.scoreIndo').replaceWith('<p class="scoreIndo"">INDONESIA:  ' + indo + '</p>');
+  $('.scorePenjajah').replaceWith('<p class="scorePenjajah">PENJAJAH:  ' + penjajah + '</p>');
 
 }
 
