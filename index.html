@@ -200,6 +200,7 @@ var penjajah = 2;
 initialize();
 
 function initialize(){
+$('.box').replaceWith('');
 $('.game-page').addClass('hidden');
 $('.board').removeClass('hidden');
 $('.end-page').addClass('hidden');
@@ -303,9 +304,7 @@ function aiplay(){
   let highestScore = -1000;
   for (let i = 0; i < validMoves.length;i++){
     validMoves[i].minimaxScore = minimax(0, LEVEL, validMoves[i], true, -1000, 1000);
-      // console.log("minimax score :" + validMoves[i].minimaxScore)
-      // console.log("highest score: " + highestScore);
-      // console.log("the index: " + highestScoreIndex);
+
     if (validMoves[i].minimaxScore > highestScore){
       highestScore = validMoves[i].minimaxScore;
       highestScoreIndex = i;
@@ -323,7 +322,24 @@ function minimax(depth, maxDepth, board, maximizingPlayer, alpha, beta){
   moves = board.getValidMoves(maximizingPlayer ? 2 : 1);
 
   if (moves.length == 0 || (depth > maxDepth)){
-    return board.countPlayer(maximizingPlayer ? 2 : 1);
+    let minmaxScore = board.countPlayer(maximizingPlayer ? 2 : 1);
+    // let corner = SIZE - 1;
+    // let besideCorner = SIZE - 2;
+    // let strategicMoves = ["0,0","0,"+corner,corner+",0",corner+","+ corner];
+    // let badMoves = ["0,1","0,"+besideCorner, "1,0", "1,1","1,"+besideCorner, "1,"+corner,besideCorner+",0", besideCorner+",1", besideCorner+","+besideCorner, besideCorner+","+corner, corner+",1", corner+","+besideCorner];
+    //
+    // if (strategicMoves.includes(board.movedx+","+board.movedy)){
+    //   console.log("masuk gud muv");
+    //   console.log(board.movedx+","+board.movedy);
+    //   minmaxScore = 1000;
+    // }
+    // else if (badMoves.includes(board.movedx+","+board.movedy)){
+    //   console.log(" masuk bad muv");
+    //   console.log(board.movedx+","+board.movedy);
+    //   minmaxScore = 0;
+    // }
+
+    return minmaxScore;
   }
 
   if (maximizingPlayer){
