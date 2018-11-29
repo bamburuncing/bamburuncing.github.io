@@ -322,7 +322,7 @@ function minimax(depth, maxDepth, board, maximizingPlayer, alpha, beta){
   moves = board.getValidMoves(maximizingPlayer ? 2 : 1);
 
   if (moves.length == 0 || (depth > maxDepth)){
-    let minmaxScore = board.countPlayer(maximizingPlayer ? 2 : 1);
+    let minmaxScore = board.countPlayer(maximizingPlayer ? 2 : 1) - board.countPlayer(maximizingPlayer ? 1 : 2);
     // let corner = SIZE - 1;
     // let besideCorner = SIZE - 2;
     // let strategicMoves = ["0,0","0,"+corner,corner+",0",corner+","+ corner];
