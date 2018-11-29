@@ -246,7 +246,7 @@ function countEmptyBox(){
   return count;
 }
 async function announceWinner(){
-  await sleep(500);
+  await sleep(1000);
   $('.board').addClass('hidden');
   $('.end-page').removeClass('hidden');
   if (indo == penjajah){
@@ -278,8 +278,10 @@ async function move(x,y){
       refresh();
       possibleMoves();
       if (currentPlayer() == 2){
-      await sleep(500);
+      await sleep(100);
+      console.time();
         aiplay();
+        console.timeEnd();
       }
       return;
     }
@@ -302,10 +304,18 @@ function aiplay(){
   // move(validMoves[index].movedx, validMoves[index].movedy);
   let highestScoreIndex = 0;
   let highestScore = -1000;
+  let corner = SIZE - 1;
+  let besideCorner = SIZE - 2;
+  let strategicMoves = ["0,0","0,"+corner,corner+",0",corner+","+ corner];
+  let badMoves = ["0,1","0,"+besideCorner, "1,0", "1,1","1,"+besideCorner, "1,"+corner,besideCorner+",0", besideCorner+",1", besideCorner+","+besideCorner, besideCorner+","+corner, corner+",1", corner+","+besideCorner];
   for (let i = 0; i < validMoves.length;i++){
     validMoves[i].minimaxScore = minimax(0, LEVEL, validMoves[i], true, -1000, 1000);
-
-    if (validMoves[i].minimaxScore > highestScore){
+    if (strategicMoves.includes(validMoves[i].movedx+","+validMoves[i].movedy)){
+      console.log("masok");
+      highestScoreIndex = i;
+      break;
+    }
+    else if (validMoves[i].minimaxScore > highestScore){
       highestScore = validMoves[i].minimaxScore;
       highestScoreIndex = i;
     }
@@ -323,20 +333,17 @@ function minimax(depth, maxDepth, board, maximizingPlayer, alpha, beta){
 
   if (moves.length == 0 || (depth > maxDepth)){
     let minmaxScore = board.countPlayer(maximizingPlayer ? 2 : 1) - board.countPlayer(maximizingPlayer ? 1 : 2);
-    // let corner = SIZE - 1;
-    // let besideCorner = SIZE - 2;
-    // let strategicMoves = ["0,0","0,"+corner,corner+",0",corner+","+ corner];
-    // let badMoves = ["0,1","0,"+besideCorner, "1,0", "1,1","1,"+besideCorner, "1,"+corner,besideCorner+",0", besideCorner+",1", besideCorner+","+besideCorner, besideCorner+","+corner, corner+",1", corner+","+besideCorner];
-    //
+
+
     // if (strategicMoves.includes(board.movedx+","+board.movedy)){
-    //   console.log("masuk gud muv");
-    //   console.log(board.movedx+","+board.movedy);
-    //   minmaxScore = 1000;
+       // console.log("masuk gud muv");
+       // console.log(board.movedx+","+board.movedy);
+    //   minmaxScore = minmax1000;
     // }
     // else if (badMoves.includes(board.movedx+","+board.movedy)){
-    //   console.log(" masuk bad muv");
-    //   console.log(board.movedx+","+board.movedy);
-    //   minmaxScore = 0;
+      // console.log(" masuk bad muv");
+      // console.log(board.movedx+","+board.movedy);
+      // minmaxScore = -1000;
     // }
 
     return minmaxScore;
