@@ -217,18 +217,18 @@ function setSize(size){
   SIZE = size;
   if (SIZE == 4){
     sleeptime = 500;
-    boardsScore = [[30,-25,-25,30],[-25,-25,-25,-25],[-25,-25,-25,-25],[30,-25,-25,30]];
+    boardsScore = [[100,-25,-25,100],[-25,-25,-25,-25],[-25,-25,-25,-25],[100,-25,-25,100]];
   }
   else{
     sleeptime = 200;
-    boardsScore = [[100,-25,10,10,10,10,-25,100],
-                  [-25,-25,1,1,1,1,-25,-25],
-                  [10,1,5,5,5,5,1,10],
-                  [10,1,5,5,5,5,1,10],
-                  [10,1,5,5,5,5,1,10],
-                  [10,1,5,5,5,5,1,10],
-                  [-25,-25,1,1,1,1,-25,-25],
-                  [100,-25,10,10,10,10,-25,100]];
+    boardsScore = [[100,-80,10,10,10,10,-80,100],
+                  [-80 ,-80,1 ,1 ,1 ,1 ,-80,-80],
+                  [10  ,1  ,5 ,5 ,5 ,5 ,1  , 10],
+                  [10  ,1  ,5 ,5 ,5 ,5 ,1  , 10],
+                  [10  ,1  ,5 ,5 ,5 ,5 ,1  , 10],
+                  [10  ,1  ,5 ,5 ,5 ,5 ,1  , 10],
+                  [-80 ,-80,1 ,1 ,1 ,1 ,-80,-80],
+                  [100,-80,10,10,10,10 ,-80,100]];
   }
 }
 
@@ -310,8 +310,19 @@ function aiplay(){
   }
   let highestScoreIndex = 0;
   let highestScore = -1000;
+  let corner = SIZE - 1;
   for (let i = 0; i < validMoves.length;i++){
     validMoves[i].minimaxScore = minimax(0, LEVEL, validMoves[i], true, -1000, 1000);
+    let x = validMoves[i].movedx;
+    let y = validMoves[i].movedy;
+    if ((x == 0 && y == 0) || (x == 0 && y == corner) || (x == corner && y == 0) || (x == corner && y == corner)){
+      highestScoreIndex = i;
+      break;
+    }
+    else if (validMoves[i].minimaxScore > highestScore){
+      highestScore = validMoves[i].minimaxScore;
+      highestScoreIndex = i;
+    }
   }
   console.log(validMoves);
   console.log(validMoves[highestScoreIndex].movedx +", " + validMoves[highestScoreIndex].movedy)
