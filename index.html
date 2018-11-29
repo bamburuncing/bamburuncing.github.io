@@ -196,6 +196,8 @@ var turns = 1;
 var validMoves = [];
 var indo = 2;
 var penjajah = 2;
+var sleeptime = 100;
+var boardsScore = [];
 
 initialize();
 
@@ -218,6 +220,21 @@ function currentPlayer(){
 
 function setSize(size){
   SIZE = size;
+  if (SIZE == 4){
+    sleeptime = 500;
+    boardsScore = [[30,-25,-25,30],[-25,-25,-25,-25],[-25,-25,-25,-25],[30,-25,-25,30]];
+  }
+  else{
+    sleeptime = 100;
+    boardsScore = [[30,-25,10,10,10,10,-25,30],
+                  [-25,-25,1,1,1,1,-25,-25],
+                  [10,1,5,5,5,5,1,10],
+                  [10,1,5,5,5,5,1,10],
+                  [10,1,5,5,5,5,1,10],
+                  [10,1,5,5,5,5,1,10],
+                  [-25,-25,1,1,1,1,-25,-25],
+                  [30,-25,10,10,10,10,-25,30]];
+  }
 }
 
 function setLevel(level){
@@ -246,7 +263,7 @@ function countEmptyBox(){
   return count;
 }
 async function announceWinner(){
-  await sleep(1000);
+  await sleep(2000);
   $('.board').addClass('hidden');
   $('.end-page').removeClass('hidden');
   if (indo == penjajah){
@@ -278,7 +295,7 @@ async function move(x,y){
       refresh();
       possibleMoves();
       if (currentPlayer() == 2){
-      await sleep(100);
+      await sleep(sleeptime);
       console.time();
         aiplay();
         console.timeEnd();
@@ -298,10 +315,6 @@ function aiplay(){
     move(validMoves[0].movedx, validMoves[0].movedy);
     return;
   }
-  // let min = 0;
-  // let max = validMoves.length - 1;
-  // let index = Math.floor(Math.random() * (max - min + 1)) + min;
-  // move(validMoves[index].movedx, validMoves[index].movedy);
   let highestScoreIndex = 0;
   let highestScore = -1000;
   let corner = SIZE - 1;
@@ -332,6 +345,7 @@ function minimax(depth, maxDepth, board, maximizingPlayer, alpha, beta){
   moves = board.getValidMoves(maximizingPlayer ? 2 : 1);
 
   if (moves.length == 0 || (depth > maxDepth)){
+    let boxVal = boardsScore[board.movedx][board.movedy];
     let minmaxScore = board.countPlayer(maximizingPlayer ? 2 : 1) - board.countPlayer(maximizingPlayer ? 1 : 2);
 
 
@@ -346,7 +360,7 @@ function minimax(depth, maxDepth, board, maximizingPlayer, alpha, beta){
       // minmaxScore = -1000;
     // }
 
-    return minmaxScore;
+    return minmaxScore + boxVal;
   }
 
   if (maximizingPlayer){
