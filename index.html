@@ -79,7 +79,6 @@ class Board{
     this.size = size;
     this.state = [];
     this.minimaxScore = 0;
-    //console.log(this.state)
     this.initBoard();
     this.movedx = 0;
     this.movedy = 0;
@@ -129,8 +128,6 @@ class Board{
           }
 
           if (piecesToFlip){
-            //console.log("arah:" + i +", " + j);
-            //console.log("k:"  + k);
             this.state[x][y] = player;
             for (let h = 1; h <= k ; h++ ){
               this.state[x + i * h][y + j * h] = player;
@@ -153,8 +150,6 @@ class Board{
 
         for (let i = 0; i < this.size; i++) {
             for (let j = 0; j < this.size; j++) {
-              //console.log("ini state b")
-              //console.log(b.state);
                 if (b.checkIfValidMove(i, j, player)) {
                   validMoves.push(b);
                 }
@@ -225,15 +220,15 @@ function setSize(size){
     boardsScore = [[30,-25,-25,30],[-25,-25,-25,-25],[-25,-25,-25,-25],[30,-25,-25,30]];
   }
   else{
-    sleeptime = 100;
-    boardsScore = [[30,-25,10,10,10,10,-25,30],
+    sleeptime = 200;
+    boardsScore = [[100,-25,10,10,10,10,-25,100],
                   [-25,-25,1,1,1,1,-25,-25],
                   [10,1,5,5,5,5,1,10],
                   [10,1,5,5,5,5,1,10],
                   [10,1,5,5,5,5,1,10],
                   [10,1,5,5,5,5,1,10],
                   [-25,-25,1,1,1,1,-25,-25],
-                  [30,-25,10,10,10,10,-25,30]];
+                  [100,-25,10,10,10,10,-25,100]];
   }
 }
 
@@ -278,7 +273,6 @@ async function announceWinner(){
 }
 
 async function move(x,y){
-  //console.log(validMoves);
   if (countEmptyBox() == 0){
     refresh();
     announceWinner();
@@ -306,7 +300,6 @@ async function move(x,y){
   return;
 }
 
-// INI ADALAH AI SEMENTARA YANG MILIH RANDOM move
 function aiplay(){
   if (currentPlayer() == 1 || validMoves.length == 0){
     return;
@@ -317,21 +310,8 @@ function aiplay(){
   }
   let highestScoreIndex = 0;
   let highestScore = -1000;
-  let corner = SIZE - 1;
-  let besideCorner = SIZE - 2;
-  let strategicMoves = ["0,0","0,"+corner,corner+",0",corner+","+ corner];
-  let badMoves = ["0,1","0,"+besideCorner, "1,0", "1,1","1,"+besideCorner, "1,"+corner,besideCorner+",0", besideCorner+",1", besideCorner+","+besideCorner, besideCorner+","+corner, corner+",1", corner+","+besideCorner];
   for (let i = 0; i < validMoves.length;i++){
     validMoves[i].minimaxScore = minimax(0, LEVEL, validMoves[i], true, -1000, 1000);
-    if (strategicMoves.includes(validMoves[i].movedx+","+validMoves[i].movedy)){
-      console.log("masok");
-      highestScoreIndex = i;
-      break;
-    }
-    else if (validMoves[i].minimaxScore > highestScore){
-      highestScore = validMoves[i].minimaxScore;
-      highestScoreIndex = i;
-    }
   }
   console.log(validMoves);
   console.log(validMoves[highestScoreIndex].movedx +", " + validMoves[highestScoreIndex].movedy)
@@ -339,27 +319,12 @@ function aiplay(){
 }
 
 function minimax(depth, maxDepth, board, maximizingPlayer, alpha, beta){
-  // console.log(board);
-  // console.log("depth : " + depth);
   let moves = [];
   moves = board.getValidMoves(maximizingPlayer ? 2 : 1);
 
   if (moves.length == 0 || (depth > maxDepth)){
     let boxVal = boardsScore[board.movedx][board.movedy];
     let minmaxScore = board.countPlayer(maximizingPlayer ? 2 : 1) - board.countPlayer(maximizingPlayer ? 1 : 2);
-
-
-    // if (strategicMoves.includes(board.movedx+","+board.movedy)){
-       // console.log("masuk gud muv");
-       // console.log(board.movedx+","+board.movedy);
-    //   minmaxScore = minmax1000;
-    // }
-    // else if (badMoves.includes(board.movedx+","+board.movedy)){
-      // console.log(" masuk bad muv");
-      // console.log(board.movedx+","+board.movedy);
-      // minmaxScore = -1000;
-    // }
-
     return minmaxScore + boxVal;
   }
 
@@ -385,7 +350,6 @@ function minimax(depth, maxDepth, board, maximizingPlayer, alpha, beta){
         break;
       }
     }
-    //console.log("ini bestVal : " + bestVal);
     return bestVal;
   }
 }
@@ -417,8 +381,6 @@ function createBoardHTML(){
 }
 function possibleMoves(){
   validMoves = mainBoard.getValidMoves(currentPlayer());
-  //console.log(validMoves);
-  //console.log(currentPlayer());
   if (indo == 0 || penjajah == 0){
     announceWinner();
   }
