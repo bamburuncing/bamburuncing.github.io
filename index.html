@@ -217,18 +217,21 @@ function setSize(size){
   SIZE = size;
   if (SIZE == 4){
     sleeptime = 500;
-    boardsScore = [[100,-25,-25,100],[-25,-25,-25,-25],[-25,-25,-25,-25],[100,-25,-25,100]];
+    boardsScore = [[16,5,5,16],
+                    [5,5,5,5],
+                    [5,5,5,5],
+                    [16,5,5,16]];
   }
   else{
     sleeptime = 200;
-    boardsScore = [[100,-80,10,10,10,10,-80,100],
-                  [-80 ,-80,1 ,1 ,1 ,1 ,-80,-80],
+    boardsScore = [[64,- 64,10,10,10,10,-64,64],
+                  [-64 ,-64,1 ,1 ,1 ,1 ,-64,-64],
                   [10  ,1  ,5 ,5 ,5 ,5 ,1  , 10],
                   [10  ,1  ,5 ,5 ,5 ,5 ,1  , 10],
                   [10  ,1  ,5 ,5 ,5 ,5 ,1  , 10],
                   [10  ,1  ,5 ,5 ,5 ,5 ,1  , 10],
-                  [-80 ,-80,1 ,1 ,1 ,1 ,-80,-80],
-                  [100,-80,10,10,10,10 ,-80,100]];
+                  [-64 ,-64,1 ,1 ,1 ,1 ,-64,-64],
+                  [64,-64,10,10,10,10 ,-64,64]];
   }
 }
 
@@ -333,13 +336,22 @@ function minimax(depth, maxDepth, board, maximizingPlayer, alpha, beta){
   let moves = [];
   moves = board.getValidMoves(maximizingPlayer ? 1 : 2);
 
+  let boxValue = 0;
+  for (let i = 0; i < SIZE-1; i++) {
+    for (let j = 0; j < SIZE-1; j++) {
+      if (board.state[i][j] == (maximizingPlayer ? 2 : 1)) {
+        boxValue += boardsScore[i][j];
+      }
+    }
+  }
+
   if (depth > maxDepth){
     //console.log("depth");
-    return moves.length + (board.countPlayer(maximizingPlayer ? 2 : 1) - board.countPlayer(maximizingPlayer ? 1 : 2));
+    return boxValue + moves.length;
   }
   if (moves.length == 0){
     //console.log("0");
-    return maximizingPlayer ? (SIZE*SIZE) : -(SIZE*SIZE);
+    return boxValue + (maximizingPlayer ? (SIZE*SIZE) : -(SIZE*SIZE));
   }
 
   if (maximizingPlayer){
