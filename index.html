@@ -331,12 +331,15 @@ function aiplay(){
 
 function minimax(depth, maxDepth, board, maximizingPlayer, alpha, beta){
   let moves = [];
-  moves = board.getValidMoves(maximizingPlayer ? 2 : 1);
+  moves = board.getValidMoves(maximizingPlayer ? 1 : 2);
 
-  if (moves.length == 0 || (depth > maxDepth)){
-    let boxVal = boardsScore[board.movedx][board.movedy];
-    let minmaxScore = board.countPlayer(maximizingPlayer ? 2 : 1) - board.countPlayer(maximizingPlayer ? 1 : 2);
-    return minmaxScore + boxVal;
+  if (depth > maxDepth){
+    //console.log("depth");
+    return moves.length + (board.countPlayer(maximizingPlayer ? 2 : 1) - board.countPlayer(maximizingPlayer ? 1 : 2));
+  }
+  if (moves.length == 0){
+    //console.log("0");
+    return maximizingPlayer ? (SIZE*SIZE) : -(SIZE*SIZE);
   }
 
   if (maximizingPlayer){
