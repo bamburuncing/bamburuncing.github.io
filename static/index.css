@@ -104,6 +104,13 @@ button.buttonLevel{
   background-position: center center;
 }
 
+button.buttonTurn{
+  background: url("GreenNormal_1.png");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
 button.sizeActive{
   background: url("YellowSelected_1.png");
   background-size:     cover;
@@ -112,6 +119,13 @@ button.sizeActive{
 }
 
 button.levelActive{
+  background: url("YellowSelected_1.png");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+button.turnActive{
   background: url("YellowSelected_1.png");
   background-size:     cover;
   background-repeat:   no-repeat;

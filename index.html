@@ -19,8 +19,8 @@
   <img src="static/Logo Kecil.png"/><br/><br/>
   <div class="chooseFirstPlayer">
     <p>Pilih Pemain Pertama</p>
-    <button class="buttonSize" id="aiFirst" onClick="setAIAsFirstPlayer(true)">AI</button>
-    <button class="buttonSize" id="userFirst" onClick="setAIAsFirstPlayer(false)">USER</button>
+    <button class="buttonTurn" id="aiFirst" onClick="setAIAsFirstPlayer(true)">AI</button>
+    <button class="buttonTurn" id="userFirst" onClick="setAIAsFirstPlayer(false)">USER</button>
   </div>
   <div class="boardSize">
     <p>Pilih Ukuran Papan</p>
@@ -63,6 +63,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
+$('.buttonTurn').click(function() {
+   $(this).addClass('turnActive');
+   $('.buttonTurn').not(this).removeClass('turnActive');
+});
 $('.buttonSize').click(function() {
    $(this).addClass('sizeActive');
    $('.buttonSize').not(this).removeClass('sizeActive');
