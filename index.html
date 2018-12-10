@@ -414,7 +414,7 @@ function minimax(depth, maxDepth, board, maximizingPlayer, alpha, beta){
 function createBoardHTML(){
   let width = 0;
   let screenWidth = $(window).width();
-  if(screenWidth <= 375) {
+  if(screenWidth <= 414) {
     width= SIZE * 40;
     $(".scoreboard").css("width", '320px');
     $(".playerBoard").css("width", '320px');
